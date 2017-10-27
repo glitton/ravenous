@@ -9,11 +9,18 @@ class SearchBar extends React.Component {
       location: '',
       sortBy: 'best_match'
     };
+
+    this.handleSortByChange = this.handleSortByChange.bind(this);
+    this.handleTermChange = this.handleTermChange.bind(this);
+    this.handleLocationChange = this.handleLocationChange.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+
     this.sortByOptions = {
     'Best Match'   : 'best_match',
     'Highest Rated': 'rating',
     'Most Reviewed': 'review_count'
     };
+    
   }
 
   getSortByClass(sortByOption) {
@@ -24,12 +31,36 @@ class SearchBar extends React.Component {
     }
   }
 
+  handleSortByChange(sortByOption) {
+    this.setState({
+      sortBy: sortByOption
+    }); 
+  }
+
+  handleTermChange(evt){
+    this.setState({
+      term: evt.target.value
+    });
+  }
+
+  handleLocationChange(evt) {
+    this.setState({
+      location: evt.target.value
+
+    });
+  }
+
+  handleSearch(evt) {
+    this.searchYelp(this.state.term, this.state.location, this.state.sortBy)
+    evt.preventDefault()
+  }
+
   renderSortByOptions() {
     return
       Object.keys(this.sortByOptions).map(sortByOption => {
         let sortByOptionValue = this.sortByOptions[sortByOption];
         return (
-          <li key={sortByOptionValue}>{sortByOption}</li>
+          <li onClick={this.handleSortByChange} className={this.getSortByClass(sortByOptionValue)} key={sortByOptionValue}>{sortByOption}</li>
         );  
       });
   }
@@ -43,11 +74,11 @@ class SearchBar extends React.Component {
           </ul>
         </div>
         <div className="SearchBar-fields">
-          <input placeholder="Search Businesses" />
-          <input placeholder="Where?" />
+          <input onChange={this.props.handleTermChange} placeholder="Search Businesses" />
+          <input onChange={this.props.handleLocationChange} placeholder="Where?" />
         </div>
         <div className="SearchBar-submit">
-          <a>Let's Go</a>
+          <a onClick={this.handleSearch}>Let's Go</a>
         </div>
       </div>      
     );

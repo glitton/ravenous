@@ -1,19 +1,7 @@
 import React from 'react';
 import './SearchBar.css';
 
-const sortByOptions = {
-  'Best Match'   : 'best_match',
-  'Highest Rated': 'rating',
-  'Most Reviewed': 'review_count'
-}
 
-getSortByClass(sortByOption) {
-  if(sortBy === 'best_match'){
-    return 'active';
-  } else {
-    return '';
-  }
-}
 
 
 
@@ -25,6 +13,20 @@ class SearchBar extends React.Component {
       location: '',
       sortBy: 'best_match'
     };
+  }
+
+  const sortByOptions = {
+    'Best Match'   : 'best_match',
+    'Highest Rated': 'rating',
+    'Most Reviewed': 'review_count'
+  }
+
+  getSortByClass(sortByOption) {
+    if(sortBy === 'best_match'){
+      return 'active';
+    } else {
+      return '';
+    }
   }
 
   renderSortByOptions() {

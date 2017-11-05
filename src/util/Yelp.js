@@ -1,7 +1,7 @@
 // Yelp credentials
 const clientId = 'CAllHO-oISUHh4B6rc74Xg';
 const secret = 'Ii9Her4prkNAULldWZV39DWYwHDapf8F0F5tI7tzpFU04YBOsB7l93PsGblxRxVg';
-const accessToken = '';
+let accessToken = '';
 
 // functionality that interacts with the Yelp API
 let Yelp = {
@@ -10,7 +10,7 @@ let Yelp = {
     if (accessToken) {
       return new Promise(resolve => resolve(accessToken));
     }
-    return fetch('https://cors-anywhere.herokuapp.com/api.yelp.com/oauth2/token?grant_type=client_credentials&client_id=' + client_id + '&client_secret=' + secret, 
+    return fetch('https://cors-anywhere.herokuapp.com/api.yelp.com/oauth2/token?grant_type=client_credentials&client_id=' + clientId + '&client_secret=' + secret, 
         { method: 'POST'}).then(response => 
           {
             return response.json();
@@ -30,7 +30,7 @@ let Yelp = {
     }).then(response => {
       return response.json();
     }).then(jsonResponse => {
-      if(jsonReponse.businesses) {
+      if(jsonResponse.businesses) {
         return jsonResponse.businesses.map(business => (
           {             
             id: business.id, 

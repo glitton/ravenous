@@ -21,6 +21,7 @@ let Yelp = {
 
   search(term, location, sortBy) {
     return Yelp.getAccessToken().then(() => {
+      console.log(accessToken);
       return fetch('https://cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?term=' + term + '&location=' + location + '&sort_by=' + sortBy, 
       {
         headers: {

@@ -31,9 +31,10 @@ let Yelp = {
       return response.json();
     }).then(jsonResponse => {
       if(jsonReponse.businesses) {
-        return jsonResponse.businesses.map((business) =>  
+        return jsonResponse.businesses.map(business => { 
+          return 
             {
-              id: business.id,
+              id: business.id, 
               imageSrc: business.image_url,
               name: business.name,
               address: business.location.address1,
@@ -43,8 +44,8 @@ let Yelp = {
               category: business.categories[0].title,
               rating: business.rating,
               reviewCount: business.review_count
-            };
-        );//end of then jsonResponse
+          };
+        });//end of then jsonResponse.businesses.map
       }
     })
   } //end of search method
